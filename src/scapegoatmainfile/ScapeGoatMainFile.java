@@ -18,11 +18,18 @@ public class ScapeGoatMainFile {
         // TODO code application logic here
         
         ScapeGoatTree SGT= new ScapeGoatTree();
-        SGT.Insert(34);
-        SGT.Insert(67);
-        SGT.Insert(11);
-        SGT.Insert(24);
-        SGT.InOrder();
+        SGT.Insert(7);
+        SGT.Insert(6);
+        SGT.Insert(3);
+        SGT.Insert(1);
+        SGT.Insert(0);
+        SGT.Insert(8);
+        SGT.Insert(9);
+        SGT.Insert(4);
+        SGT.Insert(5);
+        SGT.Insert(2);
+        SGT.Insert(3);
+        SGT.PreOrder();
     }
     
 }

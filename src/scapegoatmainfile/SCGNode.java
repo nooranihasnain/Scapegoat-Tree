@@ -9,12 +9,13 @@ package scapegoatmainfile;
  *
  * @author Hasnain Noorani
  */
-public class SCGNode {
-    SCGNode Right, Left, Parent;
-    int Value;
+class SCGNode {
+    protected SCGNode Right, Left, Parent;
+    protected int Value;
     
     SCGNode(int val)
     {
+        Right=Left=Parent=null;
         Value=val;
     }
 }

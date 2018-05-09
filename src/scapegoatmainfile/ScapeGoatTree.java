@@ -43,10 +43,7 @@ public class ScapeGoatTree {
         }
         else
         {
-            int n=1;
-            n+=GetSize(Rt.Left);
-            n+=GetSize(Rt.Right);
-            return n;
+            return (GetSize(Rt.Left)+1+GetSize(Rt.Right));
         }
     }
     
@@ -151,20 +148,25 @@ public class ScapeGoatTree {
         SCGNode Parent=N.Parent;
         SCGNode[] Arr= new SCGNode[NodeSize];
         PackIntoArr(N,Arr,0);
+        System.out.println("enetafd");
         if(Parent==null)
         {
+        System.out.println("enetafd");
             Root=BuildBalanced(Arr,0,NodeSize);
+                 
             Root.Parent=null;
         }
         else if(Parent.Right==N)
         {
             Parent.Right=BuildBalanced(Arr,0,NodeSize);
-            Parent.Right.Parent=Parent;
+            //Parent.Right.Parent=Parent;
+            System.out.println(Parent.Right.Value);
         }
         else
         {
             Parent.Left= BuildBalanced(Arr,0,NodeSize);
-            Parent.Left.Parent=Parent;
+            //Parent.Left.Parent=Parent;
+       
         }
     }
     
@@ -176,6 +178,7 @@ public class ScapeGoatTree {
         }
         i=PackIntoArr(N.Left,Arr,i);
         Arr[i++]=N;
+        
         return PackIntoArr(N.Right,Arr,i);
     }
     
@@ -199,6 +202,21 @@ public class ScapeGoatTree {
         return Arr[i+m];
     }
     
+    void PreOrder()
+    {
+        PreOrder(Root);
+    }
+    
+    private void PreOrder(SCGNode Rt)
+    {
+        if(Rt!=null)
+        {
+            System.out.println(Rt.Value);
+            InOrder(Rt.Left);
+            InOrder(Rt.Right);
+        }
+    }
+    
     void InOrder()
     {
         InOrder(Root);
@@ -212,5 +230,51 @@ public class ScapeGoatTree {
             System.out.println(Rt.Value);
             InOrder(Rt.Right);
         }
+    }
+    
+    void Delete(int Key)
+    {
+        Root=Delete(Root,Key);
+    }
+    
+    private SCGNode Delete(SCGNode Rt, int Key)
+    {
+        if(Rt==null)
+        {
+            return Rt;
+        }
+        if(Key<Rt.Value)
+        {
+            Rt.Left=Delete(Rt.Left,Key);
+        }
+        else if(Key>Rt.Value)
+        {
+            Rt.Right=Delete(Rt.Right,Key);
+        }
+        else
+        {
+            if(Rt.Left==null)
+            {
+                return Rt.Right;
+            }
+            else if(Rt.Right==null)
+            {
+                return Rt.Left;
+            }
+            Rt.Value=MinVal(Rt.Right);
+            Rt.Right=Delete(Rt.Right,Rt.Value);
+        }
+        return Rt;
+    }
+    
+    int MinVal(SCGNode Rt)
+    {
+        int Minimum=Rt.Value;
+        while(Rt.Left!=null)
+        {
+            Minimum=Rt.Left.Value;
+            Rt=Rt.Left;
+        }
+        return Minimum;
     }
 }
